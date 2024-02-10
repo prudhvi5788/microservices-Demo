@@ -3,6 +3,8 @@ package com.prudhvi.departmentservice.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,12 @@ public class DepartmentController {
 	{
 		DepartmentDto saveDept=departmentService.saveDepartment(departmentDto);
 		return new ResponseEntity<>(saveDept,HttpStatus.CREATED);
+	}
+	@GetMapping("/getDepartment/{id}")
+	public ResponseEntity<DepartmentDto> getDepartment(@PathVariable Long id)
+	{
+		DepartmentDto depart= departmentService.getDepartmentDetails(id);
+		return new ResponseEntity<>(depart,HttpStatus.ACCEPTED);
 	}
 
 }

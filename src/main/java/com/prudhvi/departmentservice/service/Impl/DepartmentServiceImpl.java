@@ -1,5 +1,7 @@
 package com.prudhvi.departmentservice.service.Impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,21 @@ public class DepartmentServiceImpl implements DepartmentService {
 				);
 				
 		return savedDepartmentDto;
+	}
+
+	@Override
+	public DepartmentDto getDepartmentDetails(Long id) {
+		Optional<Department> departmentDetails=departmentRepo.findById(id);
+		DepartmentDto depart=new DepartmentDto();
+		if(!departmentDetails.isEmpty())
+		{
+			depart.setDepartmentCode(departmentDetails.get().getDepartmentCode());
+			depart.setDepartmentDescription(departmentDetails.get().getDepartmentDesc());
+			depart.setDepartmentName(departmentDetails.get().getDepartmentName());
+			depart.setId(id);
+		}
+		// TODO Auto-generated method stub
+		return depart;
 	}
 	
 }
